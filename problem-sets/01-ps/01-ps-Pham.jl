@@ -3,7 +3,6 @@
 using CompEcon # for integration routine
 using Distributions 
 using FastGaussQuadrature
-using Expectations
 using QuadGK
 using LinearAlgebra, Statistics
 using Optim
@@ -70,4 +69,4 @@ end
 # estimate_pi(1000000)
 
 # Problem 3
-
+run(`sh problem3.sh`)
