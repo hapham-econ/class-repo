@@ -1,10 +1,11 @@
 using Optim
-using JuMP
 using Distributions
 using LinearAlgebra
 using ForwardDiff
 using NLsolve
 using Plots
+using JuMP
+using HiGHS
 
 ### Problem 1
 # 20000 x 20000 random number
@@ -158,3 +159,15 @@ p2 = 1
 w = 110
 utility_maximizer(kappa, eta, p1, p2, w, [-2.0])
 
+# alternatively use JuMP, much cleaner...
+using Ipopt
+model = Model(Ipopt.Optimizer)
+@variable(model, c1)
+@variable(model, c2)
+@NLobjective(model, Max, (kappa*c1^(1-1/eta) + (1-kappa)*c2^(1- 1/eta))^(eta/(eta - 1)))
+@constraint(model, constraint1, p1*c1 + p2*c2 <= 110)
+@constraint(model, c1 >= 0)
+@constraint(model, c2 >= 0)
+optimize!(model)
+value(c1)
+value(c2)
