@@ -5,7 +5,6 @@ using ForwardDiff
 using NLsolve
 using Plots
 using JuMP
-using HiGHS
 
 ### Problem 1
 # 20000 x 20000 random number
